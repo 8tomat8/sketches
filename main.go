@@ -1,35 +1,25 @@
 package main
 
 import (
-	"fmt"
-	"os"
-
-	"github.com/urfave/cli"
+	"runtime"
+	"strconv"
 )
 
+var a string
+var done bool
+
+func setup() {
+	a = "hello, world"
+	done = true
+}
+
 func main() {
-	app := cli.NewApp()
-
-	app.Flags = []cli.Flag{
-		cli.StringFlag{
-			Name:  "lang",
-			Value: "english",
-			Usage: "language for the greeting",
-		},
+	runtime.GOMAXPROCS(1)
+	go setup()
+	var i int
+	for ; !done; i++ {
+		//runtime.Gosched() // Uncomment to yield main goroutine
 	}
-
-	app.Action = func(c *cli.Context) error {
-		name := "Nefertiti"
-		if c.NArg() > 0 {
-			name = c.Args().Get(0)
-		}
-		if c.String("lang") == "spanish" {
-			fmt.Println("Hola", name)
-		} else {
-			fmt.Println("Hello", name)
-		}
-		return nil
-	}
-
-	app.Run(os.Args)
+	print(strconv.Itoa(i))
+	print(a)
 }
