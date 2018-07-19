@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"net"
-	"strconv"
 	"sync"
 	"sync/atomic"
 	"time"
@@ -11,6 +10,9 @@ import (
 	"math/rand"
 
 	"fmt"
+
+	"io"
+	"os"
 
 	"github.com/sirupsen/logrus"
 )
@@ -28,7 +30,7 @@ func main() {
 		logrus.Fatal(err)
 	}
 
-	ctx, _ := context.WithTimeout(context.Background(), time.Second*5)
+	ctx, _ := context.WithTimeout(context.Background(), time.Minute*5)
 
 	stopChan := make(chan struct{})
 	go server(ctx, stopChan, l)
@@ -79,17 +81,19 @@ func worker(i int, workerWG *sync.WaitGroup, connects chan net.Conn) error {
 		workerWG.Done()
 	}()
 
-	connIndex := make([]byte, 1)
+	//connIndex := make([]byte, 1)
 	for connect := range connects {
-		_, err := connect.Read(connIndex)
+		_, err := io.Copy(os.Stdout, connect)
+		//data, err := ioutil.ReadAll(connect)
+		//_, err := connect.Read(connIndex)
 		if err != nil {
 			logrus.Warn(err)
 			continue
 		}
-		logrus.Infof("worker %d picked up connect %d", i, uint8(connIndex[0]))
+		//logrus.Infof("worker %d picked up connect %d", i, uint8(connIndex[0]))
 
 		counter = atomic.AddInt64(&counter, 1)
-		fmt.Fprint(connect, "ok"+strconv.Itoa(int(counter)))
+		//fmt.Fprint(connect, "ok"+strconv.Itoa(int(counter)))
 		time.Sleep(time.Millisecond * time.Duration(rand.Intn(500)))
 
 		err = connect.Close()
