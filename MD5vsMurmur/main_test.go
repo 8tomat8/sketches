@@ -1,8 +1,9 @@
 package main
 
 import (
-	"io/ioutil"
 	"testing"
+
+	"io/ioutil"
 
 	"github.com/satori/go.uuid"
 )
@@ -20,8 +21,8 @@ func mkinput(n int, inputSize int) [][]byte {
 }
 
 func benchmarkMD5(b *testing.B, inputSize int) {
-	// input := mkinput(b.N, inputSize)
-	input, err := ioutil.ReadFile("/home/tomat/IMG_9892.CR2")
+	//input := mkinput(b.N, inputSize)
+	input, err := ioutil.ReadFile("./milky_way_starry_sky_galaxy_119519_3840x2160.jpg")
 	if err != nil {
 		b.Fatal(err)
 	}
@@ -34,8 +35,8 @@ func benchmarkMD5(b *testing.B, inputSize int) {
 }
 
 func benchmarkMurmur(b *testing.B, inputSize int) {
-	// input := mkinput(b.N, inputSize)
-	input, err := ioutil.ReadFile("/home/tomat/IMG_9892.CR2")
+	//input := mkinput(b.N, inputSize)
+	input, err := ioutil.ReadFile("./milky_way_starry_sky_galaxy_119519_3840x2160.jpg")
 	if err != nil {
 		b.Fatal(err)
 	}
@@ -51,6 +52,10 @@ func BenchmarkMD5_16(b *testing.B)   { benchmarkMD5(b, 1) }
 func BenchmarkMD5_160(b *testing.B)  { benchmarkMD5(b, 10) }
 func BenchmarkMD5_1600(b *testing.B) { benchmarkMD5(b, 100) }
 
+//func BenchmarkMD5_16000(b *testing.B) { benchmarkMD5(b, 1000) }
+
 func BenchmarkMurmur_16(b *testing.B)   { benchmarkMurmur(b, 1) }
 func BenchmarkMurmur_160(b *testing.B)  { benchmarkMurmur(b, 10) }
 func BenchmarkMurmur_1600(b *testing.B) { benchmarkMurmur(b, 100) }
+
+//func BenchmarkMurmur_16000(b *testing.B) { benchmarkMurmur(b, 1000) }
