@@ -1,0 +1,59 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/whitelist-source-range: "127.0.0.1/32"
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  name: internal
+spec:
+  rules:
+  - host: internal.example.com
+    http:
+      paths:
+      - backend:
+          serviceName: httpdump
+          servicePort: 8080
+        path: /somepath
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: httpdump
+  labels:
+    app: httpdump
+    service: httpdump
+spec:
+  ports:
+  - port: 8080
+    targetPort: 8080
+    protocol: TCP
+    name: http
+  selector:
+    app: httpdump
+    service: httpdump
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: httpdump
+  labels:
+    app: httpdump
+    service: httpdump
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: httpdump
+      service: httpdump
+  template:
+    metadata:
+      labels:
+        app: httpdump
+        service: httpdump
+    spec:
+      containers:
+      - name: httpdump
+        image: 8tomat8/httpdump:latest
+        ports:
+        - containerPort: 8080

@@ -1,10 +1,9 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
-
-	"fmt"
 
 	"github.com/pkg/errors"
 	"gopkg.in/h2non/filetype.v1"
