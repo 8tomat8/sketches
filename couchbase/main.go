@@ -3,9 +3,8 @@ package main
 import (
 	"flag"
 	"fmt"
-	"log"
-
 	"github.com/couchbase/go-couchbase"
+	"log"
 )
 
 var (
@@ -23,7 +22,6 @@ func main() {
 	fmt.Println(*addr)
 	fmt.Println(*user)
 	fmt.Println(*pass)
-
 	cli, err := couchbase.ConnectWithAuthCreds(*addr, *user, *pass)
 	if err != nil {
 		log.Fatalf("Error connecting:  %v", err)

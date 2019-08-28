@@ -1,0 +1,8 @@
+{{- define "labels" }}labels:
+  app: {{ .Values.name }}
+  service: {{ .Values.name }}
+  app.kubernetes.io/name: {{ .Values.name }}
+  helm.sh/chart: "{{.Chart.Name}}-{{.Chart.Version}}"
+  app.kubernetes.io/instance: {{ .Values.name }}-{{ .Release.Name }}
+  app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{- end }}
