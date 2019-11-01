@@ -57,7 +57,21 @@ func benchmarkMinioBlake2b(b *testing.B, inputSize int) {
 	output := make([]string, b.N)
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		output[i] = Murmur(input)
+		output[i] = MinioBlake2b(input)
+	}
+	result = output
+}
+
+func benchmarkSHA256(b *testing.B, inputSize int) {
+	//input := mkinput(b.N, inputSize)
+	input, err := ioutil.ReadFile("./milky_way_starry_sky_galaxy_119519_3840x2160.jpg")
+	if err != nil {
+		b.Fatal(err)
+	}
+	output := make([]string, b.N)
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		output[i] = SHA256(input)
 	}
 	result = output
 }
@@ -77,5 +91,11 @@ func BenchmarkMurmur_1600(b *testing.B) { benchmarkMurmur(b, 100) }
 func BenchmarkMinioBlake2b_16(b *testing.B)   { benchmarkMinioBlake2b(b, 1) }
 func BenchmarkMinioBlake2b_160(b *testing.B)  { benchmarkMinioBlake2b(b, 10) }
 func BenchmarkMinioBlake2b_1600(b *testing.B) { benchmarkMinioBlake2b(b, 100) }
+
+//func BenchmarkMurmur_16000(b *testing.B) { benchmarkMurmur(b, 1000) }
+
+func BenchmarkSHA256_16(b *testing.B)   { benchmarkSHA256(b, 1) }
+func BenchmarkSHA256_160(b *testing.B)  { benchmarkSHA256(b, 10) }
+func BenchmarkSHA256_1600(b *testing.B) { benchmarkSHA256(b, 100) }
 
 //func BenchmarkMurmur_16000(b *testing.B) { benchmarkMurmur(b, 1000) }

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"crypto/sha256"
 	"encoding/hex"
 	"github.com/minio/blake2b-simd"
 
@@ -23,6 +24,12 @@ func Murmur(data []byte) string {
 
 func MinioBlake2b(data []byte) string {
 	h := blake2b.New256()
+	h.Write(data)
+	return hex.EncodeToString(h.Sum(nil))
+}
+
+func SHA256(data []byte) string {
+	h := sha256.New()
 	h.Write(data)
 	return hex.EncodeToString(h.Sum(nil))
 }
