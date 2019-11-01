@@ -1,5 +1,7 @@
 # Results
-`$ go test -bench=.
+
+~~~
+$ go test -bench=.
  goos: darwin
  goarch: amd64
  pkg: github.com/8tomat8/sketches/hashbench
@@ -16,4 +18,5 @@
  BenchmarkSHA256_160-12                       123           9890037 ns/op
  BenchmarkSHA256_1600-12                      121           9712701 ns/op
  PASS
- ok      github.com/8tomat8/sketches/hashbench   20.204s`
+ ok      github.com/8tomat8/sketches/hashbench   20.204s
+~~~
