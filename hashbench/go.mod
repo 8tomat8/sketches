@@ -7,6 +7,5 @@ require (
 	github.com/minio/blake2b-simd v0.0.0-20160723061019-3f5f724cb5b1
 	github.com/satori/go.uuid v1.2.0
 	github.com/spaolacci/murmur3 v1.1.0
-	golang.org/x/crypto v0.0.0-20191029031824-8986dd9e96cf // indirect
 	gopkg.in/check.v1 v1.0.0-20190902080502-41f04d3bba15 // indirect
 )
