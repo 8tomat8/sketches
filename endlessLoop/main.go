@@ -18,8 +18,9 @@ func main() {
 	go setup()
 	var i int
 	for ; !done; i++ {
-		//runtime.Gosched() // Uncomment to yield main goroutine
+		// runtime.Gosched() // Uncomment to yield main goroutine
 	}
 	print(strconv.Itoa(i))
+	print("\n")
 	print(a)
 }
