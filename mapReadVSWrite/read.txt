@@ -1,0 +1,17 @@
+goos: linux
+goarch: amd64
+pkg: mapbenchmark
+BenchmarkMapReadBeforeWrite/10x10-12         	61505433	        18.2 ns/op
+BenchmarkMapReadBeforeWrite/10x100-12        	47509341	        25.0 ns/op
+BenchmarkMapReadBeforeWrite/100x10-12        	64941406	        19.6 ns/op
+BenchmarkMapReadBeforeWrite/100x100-12       	45587472	        26.2 ns/op
+BenchmarkMapReadBeforeWrite/1000x10-12       	42958140	        26.9 ns/op
+BenchmarkMapReadBeforeWrite/1000x100-12      	35417773	        34.6 ns/op
+BenchmarkMapReadBeforeWrite/10000x10-12      	33253018	        36.4 ns/op
+BenchmarkMapReadBeforeWrite/10000x100-12     	27979184	        43.0 ns/op
+BenchmarkMapReadBeforeWrite/100000x10-12     	26417998	        42.5 ns/op
+BenchmarkMapReadBeforeWrite/100000x100-12    	22733400	        52.6 ns/op
+BenchmarkMapReadBeforeWrite/1000000x10-12    	14149357	        82.3 ns/op
+BenchmarkMapReadBeforeWrite/1000000x100-12   	 9991741	       113 ns/op
+PASS
+ok  	mapbenchmark	38.197s

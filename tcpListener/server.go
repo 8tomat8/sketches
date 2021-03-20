@@ -2,17 +2,14 @@ package main
 
 import (
 	"context"
+	"fmt"
+	"io"
+	"math/rand"
 	"net"
+	"os"
 	"sync"
 	"sync/atomic"
 	"time"
-
-	"math/rand"
-
-	"fmt"
-
-	"io"
-	"os"
 
 	"github.com/sirupsen/logrus"
 )
